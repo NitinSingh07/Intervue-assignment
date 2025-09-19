@@ -469,7 +469,7 @@ const TeacherPollCreation = ({ socket, students, onPollCreated }) => {
           width: "64px",
           height: "64px",
           borderRadius: "50%",
-          background: "linear-gradient(135deg, #6366F1, #8B5CF6)",
+          background: "#5767D0",
           border: "none",
           color: "white",
           cursor: "pointer",

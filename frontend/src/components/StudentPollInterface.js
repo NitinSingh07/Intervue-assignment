@@ -5,8 +5,15 @@ const StudentPollInterface = ({ socket, pollData, userName }) => {
   const [timeLeft, setTimeLeft] = useState(0);
   const [hasAnswered, setHasAnswered] = useState(false);
 
+  // Check if poll is active and not revealed
+  const isPollActive =
+    pollData &&
+    !pollData.revealed &&
+    pollData.endsAt &&
+    Date.now() < pollData.endsAt;
+
   useEffect(() => {
-    if (pollData) {
+    if (isPollActive) {
       // Calculate remaining time from endsAt (more accurate than duration)
       let teacherTime = 15; // default
 
@@ -65,7 +72,7 @@ const StudentPollInterface = ({ socket, pollData, userName }) => {
         clearInterval(updateInterval);
       };
     }
-  }, [pollData]);
+  }, [isPollActive, pollData]);
 
   const handleOptionSelect = (optionId) => {
     if (!hasAnswered && timeLeft > 0) {
@@ -88,63 +95,102 @@ const StudentPollInterface = ({ socket, pollData, userName }) => {
       .padStart(2, "0")}`;
   };
 
-  if (!pollData) {
+  // Show loading screen if no active poll is available
+  if (!isPollActive) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-        <div className="w-full max-w-lg mx-auto text-center">
-          {/* Branding Tag */}
-          <div className="mb-16">
-            <div
-              className="text-white px-6 py-2 rounded-full inline-flex items-center gap-2"
-              style={{ backgroundColor: "#5767D0" }}
+      <div className="fixed inset-0 bg-white">
+        {/* Branding Tag - Frame 427319795 specs */}
+        <div
+          style={{
+            position: "absolute",
+            top: "359px",
+            left: "667px",
+            width: "134px",
+            height: "31px",
+          }}
+        >
+          <div
+            style={{
+              background: "linear-gradient(to right, #7565D9, #4D0ACD)",
+              color: "white",
+              padding: "9px 9px",
+              borderRadius: "24px",
+              display: "flex",
+              alignItems: "center",
+              gap: "7px",
+              height: "100%",
+              width: "100%",
+              boxSizing: "border-box",
+            }}
+          >
+            <svg
+              style={{ width: "16px", height: "16px" }}
+              fill="currentColor"
+              viewBox="0 0 20 20"
             >
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                <path
-                  fillRule="evenodd"
-                  d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"
-                  clipRule="evenodd"
-                />
-              </svg>
-              <span className="font-medium">Intervue Poll</span>
-            </div>
+              <path
+                fillRule="evenodd"
+                d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"
+                clipRule="evenodd"
+              />
+            </svg>
+            <span style={{ fontWeight: "600", fontSize: "14px" }}>
+              Intervue Poll
+            </span>
           </div>
-
-          {/* Loading Spinner */}
-          <div className="mb-12">
-            <div
-              className="animate-spin rounded-full h-20 w-20 border-4 border-transparent mx-auto mb-8"
-              style={{
-                borderTopColor: "#5767D0",
-                borderRightColor: "#5767D0",
-              }}
-            ></div>
-            <h2 className="text-2xl font-bold text-black mb-4">
-              Wait for the teacher to ask questions..
-            </h2>
-          </div>
-
-          {/* Chat Icon */}
-          {/* <div className="fixed bottom-8 right-8">
-            <div
-              className="w-14 h-14 rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:shadow-xl transition-shadow"
-              style={{ backgroundColor: "#5767D0" }}
-            >
-              <svg
-                className="w-6 h-6 text-white"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-                />
-              </svg>
-            </div>
-          </div> */}
         </div>
+
+        {/* Loading Spinner - Ellipse 1022 specs */}
+        <div
+          style={{
+            position: "absolute",
+            top: "430px",
+            left: "706px",
+            width: "57px",
+            height: "58px",
+          }}
+        >
+          <div
+            style={{
+              width: "100%",
+              height: "100%",
+              border: "4px solid transparent",
+              borderTop: "4px solid #500ECE",
+              borderRadius: "50%",
+              animation: "spin 1s linear infinite",
+            }}
+          ></div>
+        </div>
+
+        {/* Wait Message - Text specs */}
+        <div
+          style={{
+            position: "absolute",
+            top: "522px",
+            left: "366px",
+            width: "737px",
+            height: "42px",
+            fontSize: "33px",
+            fontWeight: "600",
+            color: "#000000",
+            textAlign: "center",
+            lineHeight: "100%",
+            letterSpacing: "0%",
+          }}
+        >
+          Wait for the teacher to ask questions..
+        </div>
+
+        <style jsx>{`
+          @keyframes spin {
+            0% {
+              transform: rotate(0deg);
+            }
+            100% {
+              transform: rotate(360deg);
+            }
+          }
+        `}</style>
       </div>
     );
   }

@@ -459,7 +459,7 @@ const TeacherPollCreation = ({ socket, students, onPollCreated }) => {
       </div>
 
       {/* Floating Message Button - Bottom Right */}
-      <button
+      {/* <button
         onClick={() => setShowParticipants(!showParticipants)}
         style={{
           position: "fixed",
@@ -468,7 +468,7 @@ const TeacherPollCreation = ({ socket, students, onPollCreated }) => {
           width: "64px",
           height: "64px",
           borderRadius: "50%",
-          background: "#5767D0",
+          background: "#1D68BD",
           border: "none",
           color: "white",
           cursor: "pointer",
@@ -488,7 +488,6 @@ const TeacherPollCreation = ({ socket, students, onPollCreated }) => {
           e.target.style.boxShadow = "0 8px 25px rgba(99, 102, 241, 0.3)";
         }}
       >
-        {/* Message/Chat Icon */}
         <svg
           style={{ width: "28px", height: "28px" }}
           fill="currentColor"
@@ -497,7 +496,6 @@ const TeacherPollCreation = ({ socket, students, onPollCreated }) => {
           <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z" />
         </svg>
 
-        {/* Notification Badge - Show student count */}
         {students && students.length > 0 && (
           <div
             style={{
@@ -520,7 +518,7 @@ const TeacherPollCreation = ({ socket, students, onPollCreated }) => {
             {students.length}
           </div>
         )}
-      </button>
+      </button> */}
     </div>
   );
 };

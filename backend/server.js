@@ -3,9 +3,6 @@ const http = require("http");
 const { Server } = require("socket.io");
 const cors = require("cors");
 const { v4: uuidv4 } = require("uuid");
-const fs = require("fs");
-const path = require("path");
-
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -15,39 +12,13 @@ const io = new Server(server, {
   cors: { origin: "*", methods: ["GET", "POST"] },
 });
 
-// History file path
-const HISTORY_FILE = path.join(__dirname, "poll-history.json");
-
-// Load history from file
-function loadHistory() {
-  try {
-    if (fs.existsSync(HISTORY_FILE)) {
-      const data = fs.readFileSync(HISTORY_FILE, "utf8");
-      return JSON.parse(data);
-    }
-  } catch (error) {
-    console.log("Error loading history:", error);
-  }
-  return [];
-}
-
-// Save history to file
-function saveHistory() {
-  try {
-    fs.writeFileSync(HISTORY_FILE, JSON.stringify(state.history, null, 2));
-    console.log("History saved to file:", state.history.length, "items");
-  } catch (error) {
-    console.log("Error saving history:", error);
-  }
-}
-
-// In-memory state
+// In-memory state - no file dependency for better deployment
 const state = {
   teacherSocketId: null,
   students: new Map(), // socketId -> { name }
   latestPollId: null,
   poll: null, // { id, question, options: [{id,text,count,isCorrect}], endsAt, revealed, answers: Map(name->optionId) }
-  history: loadHistory(), // Load existing history on startup
+  history: [], // Start with empty history, will persist in memory during session
 };
 
 // Helpers
@@ -97,7 +68,6 @@ function toPublicSnapshot() {
     "History questions:",
     snapshot.history.map((h) => h.question)
   );
-  console.log("========================");
 
   return snapshot;
 }
@@ -126,9 +96,8 @@ function revealResults(manual = false) {
     })),
   };
   state.history.unshift(historyItem);
-  saveHistory(); // Save to file immediately
+  // History now persists in memory only - better for deployment
 
-  console.log("=== POLL ADDED TO HISTORY ===");
   console.log("New poll added:", historyItem);
   console.log("Total history length:", state.history.length);
   console.log(
@@ -285,12 +254,26 @@ io.on("connection", (socket) => {
 
 app.get("/health", (req, res) => res.json({ ok: true }));
 
+// Add API endpoints for better deployment compatibility
+app.get("/api/poll-history", (req, res) => {
+  res.json({ history: state.history });
+});
+
+app.get("/api/current-poll", (req, res) => {
+  res.json({ poll: state.poll });
+});
+
+app.get("/api/students", (req, res) => {
+  res.json({
+    students: Array.from(state.students.values()).map((s) => s.name),
+  });
+});
+
 const PORT = process.env.PORT || 4000;
 server.listen(PORT, () => {
   console.log("Server listening on " + PORT);
-  console.log("Loaded history items:", state.history.length);
-  console.log(
-    "History questions:",
-    state.history.map((h) => h.question)
-  );
+  console.log("API endpoints available:");
+  console.log("- GET /api/poll-history");
+  console.log("- GET /api/current-poll");
+  console.log("- GET /api/students");
 });

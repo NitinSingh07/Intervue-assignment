@@ -1,24 +1,6 @@
 import React from "react";
 
 const PollHistory = ({ pollHistory, onBack }) => {
-  console.log("=== POLL HISTORY COMPONENT DEBUG ===");
-  console.log("PollHistory component rendered!");
-  console.log("Received pollHistory:", pollHistory);
-  console.log("pollHistory type:", typeof pollHistory);
-  console.log("pollHistory is array:", Array.isArray(pollHistory));
-  console.log("pollHistory length:", pollHistory?.length);
-  console.log("Each poll in history:");
-  pollHistory?.forEach((poll, index) => {
-    console.log(`Poll ${index + 1}:`, {
-      id: poll.id,
-      question: poll.question,
-      optionsCount: poll.options?.length,
-      options: poll.options,
-    });
-  });
-  console.log("onBack function:", onBack);
-  console.log("===================================");
-
   const getTotalVotes = (options) => {
     return options.reduce((sum, option) => sum + option.count, 0);
   };
@@ -28,17 +10,18 @@ const PollHistory = ({ pollHistory, onBack }) => {
       {/* Header */}
       <div
         style={{
-          position: "absolute",
-          top: "64px",
-          left: "50%",
-          transform: "translateX(-50%)",
-          fontSize: "32px",
-          fontWeight: "bold",
+          position: "relative",
+          top: "77px",
+          left: "335px",
+          width: "345px",
+          height: "50px",
+          fontWeight: 400,
+          fontSize: "40px",
           color: "black",
           textAlign: "center",
         }}
       >
-        View Poll History
+        View <span style={{ fontWeight: 600 }}>Poll History</span>
       </div>
 
       {/* Back Button */}
@@ -46,8 +29,9 @@ const PollHistory = ({ pollHistory, onBack }) => {
         onClick={onBack}
         style={{
           position: "absolute",
-          top: "62px",
-          right: "48px",
+          top: "77px",
+          right: "150px",
+          height: "40px",
           background: "#6B7280",
           color: "white",
           padding: "8px 24px",
@@ -65,10 +49,10 @@ const PollHistory = ({ pollHistory, onBack }) => {
       <div
         style={{
           position: "absolute",
-          top: "140px",
-          left: "50%",
-          transform: "translateX(-50%)",
-          width: "100%",
+          top: "172px",
+          left: "335px",
+          width: "727px",
+          height: "406px",
           maxWidth: "1000px",
           padding: "0 48px",
         }}
@@ -86,10 +70,14 @@ const PollHistory = ({ pollHistory, onBack }) => {
             <p style={{ fontSize: "14px", marginTop: "10px" }}>
               Debug: pollHistory = {JSON.stringify(pollHistory)}
             </p>
+            <p
+              style={{ fontSize: "14px", marginTop: "10px", color: "#EF4444" }}
+            >
+            </p>
           </div>
         ) : (
           <div
-            style={{ display: "flex", flexDirection: "column", gap: "60px" }}
+            style={{ display: "flex", flexDirection: "column", gap: "25px" }}
           >
             {pollHistory.map((poll, index) => {
               const totalVotes = getTotalVotes(poll.options);
@@ -99,8 +87,7 @@ const PollHistory = ({ pollHistory, onBack }) => {
                   {/* Question Title */}
                   <h3
                     style={{
-                      fontSize: "24px",
-                      fontWeight: "bold",
+                      fontWeight: 600,
                       color: "black",
                       marginBottom: "24px",
                     }}
@@ -111,9 +98,9 @@ const PollHistory = ({ pollHistory, onBack }) => {
                   {/* Question Box */}
                   <div
                     style={{
-                      width: "100%",
-                      height: "60px",
-                      backgroundColor: "#4B5563",
+                      width: "727px",
+                      height: "50px",
+                      background: "linear-gradient(to right, #343434, #6E6E6E)",
                       borderRadius: "8px 8px 0 0",
                       display: "flex",
                       alignItems: "center",
@@ -123,7 +110,6 @@ const PollHistory = ({ pollHistory, onBack }) => {
                   >
                     <h4
                       style={{
-                        fontSize: "20px",
                         fontWeight: "600",
                         color: "white",
                         margin: 0,
@@ -136,7 +122,8 @@ const PollHistory = ({ pollHistory, onBack }) => {
                   {/* Results Container */}
                   <div
                     style={{
-                      width: "100%",
+                      width: "727px",
+                      maxHeight: "289px",
                       border: "1px solid #E5E7EB",
                       backgroundColor: "white",
                       padding: "24px",

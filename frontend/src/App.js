@@ -22,7 +22,10 @@ function App() {
   const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
-    const newSocket = io("http://localhost:4000");
+    // Use environment variable for backend URL, fallback to localhost for development
+    const backendUrl =
+      process.env.REACT_APP_BACKEND_URL || "http://localhost:4000";
+    const newSocket = io(backendUrl);
     setSocket(newSocket);
 
     newSocket.on("connect", () => {

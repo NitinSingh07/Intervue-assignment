@@ -69,7 +69,7 @@ const TeacherPollResults = ({
             width: "400px",
             height: "500px",
             background: "white",
-            border: "2px solid #6366F1",
+            border: "2px solid #DFCCCC",
             borderRadius: "12px",
             overflow: "hidden",
             boxShadow: "0 8px 25px rgba(0, 0, 0, 0.15)",

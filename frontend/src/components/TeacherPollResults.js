@@ -337,7 +337,7 @@ const TeacherPollResults = ({
           top: "372px", // Just below question box
           left: "357px",
           width: "727px",
-          height: "293px", // Fixed height like image
+          maxHeight: "293px", // Fixed height like image
           border: "1px solid #AF8FF1",
           backgroundColor: "white",
           padding: "12px 14px",

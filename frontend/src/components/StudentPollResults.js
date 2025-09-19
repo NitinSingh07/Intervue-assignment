@@ -1,6 +1,37 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 const StudentPollResults = ({ pollData }) => {
+  const [timeRemaining, setTimeRemaining] = useState(0);
+
+  useEffect(() => {
+    if (!pollData || !pollData.endsAt || pollData.revealed) {
+      setTimeRemaining(0);
+      return;
+    }
+
+    const updateTimer = () => {
+      const now = Date.now();
+      const remaining = Math.max(0, Math.ceil((pollData.endsAt - now) / 1000));
+      setTimeRemaining(remaining);
+    };
+
+    // Update immediately
+    updateTimer();
+
+    // Update every second
+    const interval = setInterval(updateTimer, 1000);
+
+    return () => clearInterval(interval);
+  }, [pollData]);
+
+  // Format time as MM:SS
+  const formatTime = (seconds) => {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${minutes.toString().padStart(2, "0")}:${remainingSeconds
+      .toString()
+      .padStart(2, "0")}`;
+  };
   if (!pollData) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
@@ -45,15 +76,6 @@ const StudentPollResults = ({ pollData }) => {
     0
   );
 
-  console.log("=== VOTING RESULTS DEBUG ===");
-  console.log("Poll Data:", pollData);
-  console.log("Total Votes:", totalVotes);
-  console.log(
-    "Options with counts:",
-    pollData.options.map((opt) => ({ text: opt.text, count: opt.count }))
-  );
-  console.log("============================");
-
   return (
     <div className="fixed inset-0 bg-white">
       {/* Question Number */}
@@ -61,9 +83,11 @@ const StudentPollResults = ({ pollData }) => {
         style={{
           position: "absolute",
           top: "216px",
+          width: "130px",
+          height: "28px",
           left: "357px",
-          fontSize: "24px",
-          fontWeight: "bold",
+          fontWeight: 600,
+          fontSize: "22px",
           color: "black",
         }}
       >
@@ -74,11 +98,13 @@ const StudentPollResults = ({ pollData }) => {
       <div
         style={{
           position: "absolute",
-          top: "215px",
-          left: "535px",
+          top: "216px",
+          width: "63px",
+          height: "29px",
+          left: "497px",
           display: "flex",
           alignItems: "center",
-          gap: "8px",
+          gap: "10px",
           color: "#EF4444",
         }}
       >
@@ -96,11 +122,11 @@ const StudentPollResults = ({ pollData }) => {
         <span
           style={{
             fontFamily: "monospace",
-            fontSize: "18px",
+            fontSize: "22px",
             color: "#EF4444",
           }}
         >
-          00:00
+          {timeRemaining > 0 ? formatTime(timeRemaining) : "00:00"}
         </span>
       </div>
 
@@ -113,7 +139,7 @@ const StudentPollResults = ({ pollData }) => {
           width: "727px",
           height: "50px",
           background: "linear-gradient(to right, #343434, #6E6E6E)",
-          borderRadius: "8px 8px 0 0",
+          borderRadius: "9px 9px 0 0",
           display: "flex",
           alignItems: "center",
           padding: "0 24px",
@@ -138,7 +164,7 @@ const StudentPollResults = ({ pollData }) => {
           top: "319px", // Just below question box
           left: "357px",
           width: "727px",
-          height: "293px", // Fixed height like image
+          maxHeight: "293px", // Fixed height like image
           border: "1px solid #AF8FF1",
           backgroundColor: "white",
           padding: "12px 14px",
@@ -241,12 +267,13 @@ const StudentPollResults = ({ pollData }) => {
       <div
         style={{
           position: "absolute",
-          top: "650px",
-          left: "50%",
-          transform: "translateX(-50%)",
-          fontSize: "18px",
-          fontWeight: "500",
-          color: "#111827",
+          top: "672px",
+          left: "352px",
+          width: "737px",
+          height: "30px",
+          fontSize: "24px",
+          fontWeight: "600",
+          color: "#000000",
           textAlign: "center",
         }}
       >

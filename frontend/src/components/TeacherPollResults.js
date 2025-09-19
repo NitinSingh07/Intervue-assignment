@@ -291,8 +291,10 @@ const TeacherPollResults = ({
       <div
         style={{
           position: "absolute",
-          top: "216px",
-          left: "357px",
+          width: "105px",
+          height: "28px",
+          top: "269px",
+          left: "364px",
           fontSize: "24px",
           fontWeight: "bold",
           color: "black",
@@ -305,7 +307,7 @@ const TeacherPollResults = ({
       <div
         style={{
           position: "absolute",
-          top: "275px",
+          top: "322px",
           left: "357px",
           width: "727px",
           height: "50px",
@@ -332,7 +334,7 @@ const TeacherPollResults = ({
       <div
         style={{
           position: "absolute",
-          top: "325px", // Just below question box
+          top: "372px", // Just below question box
           left: "357px",
           width: "727px",
           height: "293px", // Fixed height like image
@@ -445,7 +447,7 @@ const TeacherPollResults = ({
           position: "absolute",
           top: "704px",
           left: "785px",
-          background: "linear-gradient(to right, #7567D9, #4D0ACD)",
+          background: "linear-gradient(to right, #8F64E1, #1D68BD)",
           height: "58px",
           width: "306px",
           borderRadius: "9999px",
@@ -474,7 +476,7 @@ const TeacherPollResults = ({
           width: "64px",
           height: "64px",
           borderRadius: "50%",
-          background: "linear-gradient(135deg, #6366F1, #8B5CF6)",
+          background: "#1D68BD",
           border: "none",
           color: "white",
           cursor: "pointer",

@@ -1,15 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 
 const WelcomeScreen = ({ onRoleSelect }) => {
+  const [selectedRole, setSelectedRole] = useState("student"); // Default to student as shown in design
+
+  const handleRoleSelect = (role) => {
+    setSelectedRole(role);
+  };
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
       <div className="bg-white w-full max-w-4xl mx-auto">
         {/* Branding Tag */}
         <div className="flex justify-center pt-8">
           <div
-            className="bg-primary-500 text-white px-4 py-2 rounded-full flex items-center gap-2"
+            className=" text-white px-4 py-2 rounded-full flex items-center gap-2"
             style={{
-              background: "linear-gradient(to right, #7567D9, #4D0ACD)",
+              background: "linear-gradient(to right, #7565D9, #4D0ACD)",
+              width: "137px",
+              height: "31px",
             }}
           >
             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
@@ -19,27 +26,61 @@ const WelcomeScreen = ({ onRoleSelect }) => {
                 clipRule="evenodd"
               />
             </svg>
-            <span className="font-medium font-sans">Intervue Poll</span>
+            <span
+              className="font-medium font-sans"
+              style={{
+                fontSize: "14px",
+                fontWeight: "600",
+                width: "134px",
+                height: "18px",
+              }}
+            >
+              Intervue Poll
+            </span>
           </div>
         </div>
 
         {/* Main Content */}
-        <div className="px-8 py-12 text-center">
-          <h1 className="text-4xl font-normal text-gray-900 mb-4 text-center leading-tight">
+        <div className="px-20 text-center" style={{}}>
+          <h1
+            className="text-gray-900 mb-4 text-center justify-center  leading-tight"
+            style={{
+              fontSize: "40px",
+              fontWeight: "400",
+              width: "737px",
+              top: "289px",
+              left: "243px",
+              height: "30px",
+            }}
+          >
             Welcome to the{" "}
-            <span className="font-black">Live Polling System</span>
+            <span
+              className="font-black"
+              style={{
+                fontSize: "40px",
+                fontWeight: "600",
+                width: "737px",
+                height: "30px",
+              }}
+            >
+              Live Polling System
+            </span>
           </h1>
-          <p className="text-lg text-gray-600 mb-12 max-w-2xl mx-auto font-sans">
+          <p className="text-lg text-gray-600 mb-12  mx-auto font-normal">
             Please select the role that best describes you to begin using the
             live polling system
           </p>
 
           {/* Role Selection Cards */}
           <div className="flex gap-6 justify-center mb-12 max-w-4xl mx-auto">
-            {/* Student Card - Default selected as shown in image */}
+            {/* Student Card */}
             <div
-              className="bg-white border-2 border-blue-500 rounded-2xl p-6 flex-1 max-w-md cursor-pointer hover:shadow-lg transition-all text-left"
-              onClick={() => onRoleSelect("student")}
+              className={`bg-white border-2 ${
+                selectedRole === "student"
+                  ? "border-blue-500"
+                  : "border-gray-300"
+              } rounded-2xl p-6 flex-1 max-w-md cursor-pointer hover:shadow-lg transition-all text-left`}
+              onClick={() => handleRoleSelect("student")}
             >
               <h3 className="text-lg font-bold text-black mb-3">
                 I'm a Student
@@ -52,8 +93,12 @@ const WelcomeScreen = ({ onRoleSelect }) => {
 
             {/* Teacher Card */}
             <div
-              className="bg-white border border-gray-300 rounded-2xl p-6 flex-1 max-w-md cursor-pointer hover:shadow-lg transition-all text-left"
-              onClick={() => onRoleSelect("teacher")}
+              className={`bg-white border-2 ${
+                selectedRole === "teacher"
+                  ? "border-blue-500"
+                  : "border-gray-300"
+              } rounded-2xl p-6 flex-1 max-w-md cursor-pointer hover:shadow-lg transition-all text-left`}
+              onClick={() => handleRoleSelect("teacher")}
             >
               <h3 className="text-lg font-bold text-black mb-3">
                 I'm a Teacher
@@ -64,10 +109,10 @@ const WelcomeScreen = ({ onRoleSelect }) => {
             </div>
           </div>
 
-          {/* Continue Button - Always enabled as shown in image */}
+          {/* Continue Button */}
           <button
             className=" text-white font-bold text-lg px-12 py-4 rounded-full hover:shadow-lg transition-shadow font-sans"
-            onClick={() => onRoleSelect("student")}
+            onClick={() => onRoleSelect(selectedRole)}
             style={{
               background: "linear-gradient(to right, #8F64E1, #1D68BD)",
             }}

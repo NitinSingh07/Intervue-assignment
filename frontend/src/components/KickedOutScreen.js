@@ -13,17 +13,22 @@ const KickedOutScreen = ({ onBack }) => {
           position: "absolute",
           top: "382px",
           left: "643px",
+          height: "31px",
+          width: "154px",
         }}
       >
         <div
           style={{
-            background: "linear-gradient(to right, #7567D9, #4D0ACD)",
+            background: "linear-gradient(to right, #7565D9, #4D0ACD)",
             color: "white",
-            padding: "8px 16px",
-            borderRadius: "9999px",
+            padding: "9px 9px",
+            borderRadius: "24px",
             display: "flex",
             alignItems: "center",
-            gap: "8px",
+            gap: "7px",
+            height: "100%",
+            width: "100%",
+            boxSizing: "border-box",
           }}
         >
           <svg

@@ -11,68 +11,152 @@ const StudentNameScreen = ({ onSubmit }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-      <div className="w-full max-w-lg mx-auto text-center">
-        {/* Branding Tag */}
-        <div className="mb-12">
-          <div
-            className="text-white px-6 py-2 rounded-full inline-flex items-center gap-2"
-            style={{
-              background: "linear-gradient(to right, #7567D9, #4D0ACD)",
-            }}
+    <div className="fixed inset-0 bg-white">
+      {/* Branding Tag - Frame 427319795 specs */}
+      <div
+        style={{
+          position: "absolute",
+          top: "253px",
+          left: "643px",
+          width: "134px",
+          height: "31px",
+        }}
+      >
+        <div
+          style={{
+            background: "linear-gradient(to right, #7565D9, #4D0ACD)",
+            color: "white",
+            padding: "9px 9px",
+            borderRadius: "24px",
+            display: "flex",
+            alignItems: "center",
+            gap: "7px",
+            height: "100%",
+            width: "100%",
+            boxSizing: "border-box",
+          }}
+        >
+          <svg
+            style={{ width: "16px", height: "16px" }}
+            fill="currentColor"
+            viewBox="0 0 20 20"
           >
-            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                fillRule="evenodd"
-                d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"
-                clipRule="evenodd"
-              />
-            </svg>
-            <span className="font-medium">Intervue Poll</span>
-          </div>
-        </div>
-
-        {/* Main Content */}
-        <div className="mb-10">
-          <h1 className="text-4xl font-bold text-gray-900 mb-6">
-            Let's Get Started
-          </h1>
-          <p className="text-base text-gray-600 mb-12 max-w-md mx-auto leading-relaxed">
-            If you're a student, you'll be able to{" "}
-            <span className="font-bold text-gray-900">submit your answers</span>
-            , participate in live polls, and see how your responses compare with
-            your classmates
-          </p>
-        </div>
-
-        {/* Name Input Form */}
-        <form onSubmit={handleSubmit} className="max-w-sm mx-auto">
-          <div className="text-left mb-6">
-            <label className="block text-base font-medium text-gray-900 mb-2">
-              Enter your Name
-            </label>
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Rahul Bajaj"
-              className="w-full px-4 py-3 bg-gray-100 border-0 rounded-lg focus:outline-none focus:ring-2 text-base placeholder-gray-500"
-              style={{ "--tw-ring-color": "#5767D0" }}
-              required
+            <path
+              fillRule="evenodd"
+              d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"
+              clipRule="evenodd"
             />
-          </div>
-
-          <button
-            type="submit"
-            className="text-white font-medium text-base px-8 py-3 rounded-full hover:shadow-lg transition-all w-1/2"
-            style={{
-              background: "linear-gradient(to right, #7765DA, #5767D0)",
-            }}
-          >
-            Continue
-          </button>
-        </form>
+          </svg>
+          <span style={{ fontWeight: "600", fontSize: "14px" }}>
+            Intervue Poll
+          </span>
+        </div>
       </div>
+
+      {/* Main Title - Frame 2 specs */}
+      <div
+        style={{
+          position: "absolute",
+          top: "310px",
+          left: "50%",
+          transform: "translateX(-50%)",
+          width: "737px",
+          height: "50px",
+          fontSize: "40px",
+          fontWeight: "400",
+          color: "#000000",
+          textAlign: "center",
+          lineHeight: "100%",
+          letterSpacing: "0%",
+        }}
+      >
+        Let's <span style={{ fontWeight: "600" }}>Get Started</span>
+      </div>
+
+      {/* Description Text - Frame 3 specs */}
+      <div
+        style={{
+          position: "absolute",
+          top: "372px",
+          left: "339.53px",
+          width: "762px",
+          height: "69px",
+          fontSize: "19px",
+          fontWeight: "400",
+          color: "black",
+          textAlign: "center",
+          lineHeight: "25px",
+        }}
+      >
+        If you're a student, you'll be able to{" "}
+        <span style={{ fontWeight: "600" }}>submit your answers</span>,
+        participate in live polls, and see how your responses compare with your
+        classmates
+      </div>
+
+      {/* Enter your Name Label - Frame 427320128 specs */}
+      <div
+        style={{
+          position: "absolute",
+          top: "472px",
+          left: "483.53px",
+          fontSize: "16px",
+          fontWeight: "500",
+          color: "black",
+        }}
+      >
+        Enter your Name
+      </div>
+
+      {/* Name Input - Frame 427320128 specs */}
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Rahul Bajaj"
+          style={{
+            position: "absolute",
+            top: "507px",
+            left: "483.53px",
+            width: "507px",
+            height: "60px",
+            background: "#F5F5F5",
+            border: "none",
+            padding: "0 20px",
+            fontSize: "16px",
+            fontWeight: "400",
+            color: "black",
+            outline: "none",
+            boxSizing: "border-box",
+          }}
+          required
+        />
+
+        {/* Continue Button - Group 289665 specs */}
+        <button
+          type="submit"
+          style={{
+            position: "absolute",
+            top: "613px",
+            left: "611.53px",
+            width: "233.93px",
+            height: "57.58px",
+            background: "linear-gradient(to right, #8F64E1, #1D68BD)",
+            color: "white",
+            border: "none",
+            borderRadius: "34px",
+            fontSize: "18px",
+            fontWeight: "600",
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          Continue
+        </button>
+      </form>
     </div>
   );
 };

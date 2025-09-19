@@ -385,8 +385,7 @@ const TeacherPollCreation = ({ socket, students, onPollCreated }) => {
               <button
                 type="button"
                 onClick={addOption}
-                className="text-[#5767D0] border border-[#5767D0] px-4 py-1.5 rounded-lg hover:bg-blue-50 transition-colors inline-flex items-center gap-1 text-sm absolute"
-                style={{ left: "159px", top: "645px" }}
+                className="text-[#5767D0] border border-[#5767D0] px-4 py-1.5 rounded-lg hover:bg-blue-50 transition-colors inline-flex items-center gap-1 text-sm mt-2"
               >
                 <span>+</span>
                 Add More option
